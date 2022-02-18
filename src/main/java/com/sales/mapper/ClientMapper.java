@@ -9,8 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface ClientMapper {
 
-    Client convert(ClientRequest request);
-
     @Mapping(target = "clientId", source = "id")
     ClientResponse convert(Client client);
 }
