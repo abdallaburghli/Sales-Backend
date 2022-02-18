@@ -1,5 +1,7 @@
 package com.sales.service;
 
+import com.sales.api.PaginatedResponse;
+import com.sales.api.PaginationRequest;
 import com.sales.pojo.request.ClientRequest;
 import com.sales.pojo.response.ClientResponse;
 
@@ -12,5 +14,5 @@ public interface ClientService {
 
     ClientResponse updateClient(ClientRequest request, UUID clientId);
 
-    List<ClientResponse> retrieveClients();
+    PaginatedResponse<ClientResponse> retrieveClients(PaginationRequest request);
 }
