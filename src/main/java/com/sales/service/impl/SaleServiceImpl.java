@@ -14,6 +14,7 @@ import com.sales.service.ClientService;
 import com.sales.service.ProductService;
 import com.sales.service.SaleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SaleServiceImpl implements SaleService {
 
     private final SaleRepo saleRepo;
@@ -94,14 +96,22 @@ public class SaleServiceImpl implements SaleService {
             if (productResponse == null)
                 throw new RuntimeException("Transaction product does not exist");
 
+            if (transaction.getId() == null) {
+                newTransactions.add(transaction);
+            } else {
+                log.info("Transaction with id {} was updated: price: {} -> {}, quantity: {} -> {}",
+                        transaction.getId(),
+                        transaction.getPrice(),
+                        transactionModel.getPrice(),
+                        transaction.getQuantity(),
+                        transactionModel.getQuantity());
+
+                requestIds.add(transaction.getId());
+            }
+
             transaction.setProduct(productResponse.getProduct());
             transaction.setPrice(transactionModel.getPrice());
             transaction.setQuantity(transactionModel.getQuantity());
-
-            if (transaction.getId() == null)
-                newTransactions.add(transaction);
-            else
-                requestIds.add(transaction.getId());
         }
         newTransactions.forEach(sale::addTransaction);
 
