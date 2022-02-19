@@ -7,6 +7,8 @@ import com.sales.pojo.request.ProductRequest;
 import com.sales.pojo.response.ClientResponse;
 import com.sales.pojo.response.ProductResponse;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface ProductService {
@@ -16,4 +18,6 @@ public interface ProductService {
     ProductResponse updateProduct(ProductRequest request, UUID productId);
 
     PaginatedResponse<ProductResponse> retrieveProducts(PaginationRequest request);
+
+    Map<UUID, ProductResponse> retrieveProducts(List<UUID> ids);
 }

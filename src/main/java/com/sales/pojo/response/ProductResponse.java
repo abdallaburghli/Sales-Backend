@@ -1,5 +1,7 @@
 package com.sales.pojo.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sales.model.Product;
 import com.sales.pojo.CategoryModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +18,6 @@ public class ProductResponse {
     private String description;
     private CategoryModel category;
     private LocalDateTime createdDate;
+    @JsonIgnore
+    private Product product;
 }
