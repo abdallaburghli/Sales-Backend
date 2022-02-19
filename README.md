@@ -13,7 +13,7 @@ You can create, update and retrieve the clients by using the designated APIs.
 In order to create a product we have to attach it to a category by providing the category ID in the request.
 
 ### Sales:
-A sale object should consist one transaction at least, where a transaction is defined as an object which holds the purchased product with the specified quantity and price.
+A sale object should consist of one transaction at least, where a transaction is defined as an object which holds the purchased product with the specified quantity and price.
 
 
 ## Prerequisites: 
