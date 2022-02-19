@@ -16,10 +16,14 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.data.util.Pair.toMap;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +58,19 @@ public class ProductServiceImpl implements ProductService {
                 .collect(toList());
 
         return new PaginatedResponse<>(products, page);
+    }
+
+    @Override
+    public Map<UUID, ProductResponse> retrieveProducts(List<UUID> ids) {
+        List<Product> products = productRepo.findAllByIdIn(ids);
+
+        Map<UUID, ProductResponse> productsMap = new HashMap<>();
+        for (Product product : products) {
+            ProductResponse productResponse = mapper.convert(product);
+            productResponse.setProduct(product);
+            productsMap.put(productResponse.getProductId(), productResponse);
+        }
+        return productsMap;
     }
 
     private ProductResponse populateProduct(Product product, ProductRequest request) {

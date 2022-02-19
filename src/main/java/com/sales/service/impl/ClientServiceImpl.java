@@ -56,6 +56,16 @@ public class ClientServiceImpl implements ClientService {
         return new PaginatedResponse<>(clients, page);
     }
 
+    @Override
+    public ClientResponse retrieveClient(UUID clientId) {
+        Client client = clientRepo.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client does not exist"));
+
+        ClientResponse clientResponse =  mapper.convert(client);
+        clientResponse.setClient(client);
+        return clientResponse;
+    }
+
     private ClientResponse populateClient(Client client, ClientRequest request) {
         client.setEmail(request.getEmail());
         client.setName(request.getName());

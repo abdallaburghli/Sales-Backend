@@ -15,4 +15,6 @@ public interface ClientService {
     ClientResponse updateClient(ClientRequest request, UUID clientId);
 
     PaginatedResponse<ClientResponse> retrieveClients(PaginationRequest request);
+
+    ClientResponse retrieveClient(UUID clientId);
 }
