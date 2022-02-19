@@ -13,4 +13,6 @@ public interface CategoryService {
     CategoryModel updateCategory(CategoryModel request, UUID categoryId);
 
     PaginatedResponse<CategoryModel> retrieveCategories(PaginationRequest request);
+
+    CategoryModel retrieveCategory(UUID categoryId);
 }

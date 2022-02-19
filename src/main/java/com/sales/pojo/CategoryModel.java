@@ -1,5 +1,7 @@
 package com.sales.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sales.model.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +18,7 @@ public class CategoryModel {
     private String name;
 
     private String description;
+
+    @JsonIgnore
+    private Category category;
 }

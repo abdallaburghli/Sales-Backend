@@ -50,6 +50,16 @@ public class CategoryServiceImpl implements CategoryService {
         return new PaginatedResponse<>(categories, page);
     }
 
+    @Override
+    public CategoryModel retrieveCategory(UUID categoryId) {
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        CategoryModel model = mapper.convert(category);
+        model.setCategory(category);
+        return model;
+    }
+
     private CategoryModel populateCategory(Category category, CategoryModel request) {
         category.setName(request.getName());
         category.setDescription(request.getDescription());

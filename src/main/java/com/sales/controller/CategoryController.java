@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @PutMapping("/api/v1/categories/{categoryId}")
-    public Response<CategoryModel> createCategory(@PathVariable UUID categoryId, @RequestBody CategoryModel request) {
+    public Response<CategoryModel> updateCategory(@PathVariable UUID categoryId, @RequestBody CategoryModel request) {
         CategoryModel res = categoryService.updateCategory(request, categoryId);
         return new Response<>(res);
     }
